@@ -10,7 +10,7 @@ apiUrl ="https://"+subdomain+".wufoo.com/api/v3/forms/"+identifier+"/entries."+f
 
 def get_api_info() -> dict:
     response = requests.get(apiUrl, auth=HTTPBasicAuth(api_key, 'pass'))
-    if response.status_code != 200:  # if we don't get an ok response we have trouble
+    if response.status_code != 200:  # if we don't get an ok response
         print(f"ERROR: Failed to connected api and retrieve data, \n"
               f"Response code:{response.status_code} \n"
               f"Error message: {response.reason} ")
@@ -22,7 +22,7 @@ def get_api_info() -> dict:
 def main():
     api_data = get_api_info()
     data = api_data['Entries']
-    file_to_save = open("output.txt", 'w')
+    file_to_save = open("Output.txt", 'w')
     save_data(data, save_file=file_to_save)
 
 
