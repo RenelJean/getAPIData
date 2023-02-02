@@ -1,0 +1,56 @@
+EntryId: 1
+Field117: Summer 2023 (June 2023- August 2023)
+Field118: 
+Field119: 
+Field120: 
+Field121: 
+Field4: Mr.
+Field5: John
+Field6: Sno
+Field11: Teacher
+Field14: BSU
+Field13: jsno@bsu.edu
+Field12: bsu.com
+Field15: 5216652532
+Field217: Yes
+Field17: 
+Field18: Guest Speaker
+Field19: Site Visit
+Field20: Job Shadow
+Field21: 
+Field22: 
+Field23: 
+DateCreated: 2023-02-02 13:27:34
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
+EntryId: 2
+Field117: 
+Field118: 
+Field119: 
+Field120: Summer 2024 (June 2024- August 2024)
+Field121: 
+Field4: Mrs.
+Field5: Mary
+Field6: Blood
+Field11: Nun
+Field14: Church
+Field13: maryblood23@gmail.com
+Field12: church.org
+Field15: 1235554568
+Field217: Yes
+Field17: Course Project
+Field18: Guest Speaker
+Field19: Site Visit
+Field20: 
+Field21: 
+Field22: 
+Field23: Networking Event
+DateCreated: 2023-02-02 13:28:36
+CreatedBy: public
+DateUpdated: 
+UpdatedBy: None
++++++++++++++++++++++++++++++++++++++++++++++
+_______________________________________________
