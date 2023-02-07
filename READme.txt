@@ -11,3 +11,7 @@ Installs :
     for "import requests"
       type into termnial in the project folder scope  - "python.exe -m pip install requests
 "
+
+    for "import mysql.connector"
+        type into termnial in the project folder scope or python local   - python -m pip install mysql-connector-python
+

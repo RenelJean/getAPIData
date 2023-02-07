@@ -1,10 +1,10 @@
 import requests
 import sys
-from secrets import api_key,subdomain,identifier,format;
+from secrets import api_key,subdomain,identifier,format
 from requests.auth import HTTPBasicAuth
 
 
-apiUrl ="https://"+subdomain+".wufoo.com/api/v3/forms/"+identifier+"/entries."+format;
+apiUrl ="https://"+subdomain+".wufoo.com/api/v3/forms/"+identifier+"/entries."+format
 
 
 
