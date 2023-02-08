@@ -15,3 +15,8 @@ Installs :
     for "import mysql.connector"
         type into termnial in the project folder scope or python local   - python -m pip install mysql-connector-python
 
+
+NEED TO FIX DB MYSQL error and parse data from output.txt into correct key value labels currently the project adds data from
+output.txt and stores in ito a list to be parsed. I'm going to parse the list so if any item at entries[i][1] that isn' data
+get ignored and actually data gets linked to a dic having correct keys. As for the DB i'm going to do more research later today
+in setting up db and tables
