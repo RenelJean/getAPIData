@@ -41,11 +41,11 @@ def parse_file(filename):
 
 
 def main():
-    api_data = get_api_info()
-    data = api_data['Entries']
-    file_to_save = open("Output.txt", 'w')
-    save_data(data, save_file=file_to_save)
-    get_Form_Entries()
+   # api_data = get_api_info()
+    #data = api_data['Entries']
+    #file_to_save = open("Output.txt", 'w')
+    #save_data(data, save_file=file_to_save)
+    #get_Form_Entries()
     parse_file("output.txt")
 
 
