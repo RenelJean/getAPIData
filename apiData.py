@@ -18,34 +18,41 @@ def get_api_info() -> dict:
 
 
 def parse_file(filename):
-    key = ["entry_id", "sign_up", "prefix", "first_name", "last_name", "title", "email", 'organization_site', "number",
-           "permission"]
     with open(filename) as formFile:
         i = 0
+        row = []
+        columns = ["entry_ID", "sign_up", "prefix", "first_name", "last_name", "email", "organization_site", "number",
+                   "permission", "reasons"]
         entries = []
-        val = []
-        parsed_data = dict()
         # Splits data and stores into entries
         for line in formFile:
-            lines = line.split(',')
             entry = line.split(':')
             entries.append(entry)
 
-        for i in entries:
-            value = entries.pop()
-            val.append(value)
+        for i in range(len(entries)):
+            # print(entries[i][1])
 
-        print(val[3])
+            if i == 26:
+                break
+            line = entries[i][1].strip("\n")
+            # print(entries[25][1])
+            # if line not blank store row data
+            if line != " ":
+                row.append(line)
+
+        print(row)
+
+    return row, columns
     # print(entries[1][1])
     # i = i + 1
 
 
 def main():
-   # api_data = get_api_info()
-    #data = api_data['Entries']
-    #file_to_save = open("Output.txt", 'w')
-    #save_data(data, save_file=file_to_save)
-    #get_Form_Entries()
+    # api_data = get_api_info()
+    # data = api_data['Entries']
+    # file_to_save = open("Output.txt", 'w')
+    # save_data(data, save_file=file_to_save)
+    # get_Form_Entries()
     parse_file("output.txt")
 
 
@@ -68,7 +75,6 @@ def get_Form_Entries():
         for line in form_file:
             lines.append(line)
             if infoToFind in line:
-                print(line)
                 print('String exist in a file')
 
 
