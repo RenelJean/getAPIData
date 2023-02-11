@@ -2,6 +2,7 @@ import requests
 import sys
 from secrets import api_key, subdomain, identifier, format
 from requests.auth import HTTPBasicAuth
+import os
 
 apiUrl = "https://" + subdomain + ".wufoo.com/api/v3/forms/" + identifier + "/entries." + format
 
@@ -15,6 +16,13 @@ def get_api_info() -> dict:
         sys.exit(-1)
     json_response = response.json()
     return json_response
+
+
+# test to see if file exist and if empty
+def test_file(file_name):
+    os.path.exists(file_name)
+    if os.stat(file_name).st_size == 0:
+        print("Error File has no text, Empty text file")
 
 
 def parse_file(filename):
@@ -52,7 +60,6 @@ def main():
     # data = api_data['Entries']
     # file_to_save = open("Output.txt", 'w')
     # save_data(data, save_file=file_to_save)
-    # get_Form_Entries()
     parse_file("output.txt")
 
 
@@ -63,19 +70,6 @@ def save_data(data_to_save: list, save_file=None):
         # print the line break and save file
         print("+++++++++++++++++++++++++++++++++++++++++++++\n_______________________________________________",
               file=save_file)
-
-
-def get_Form_Entries():
-    d = {}
-    filename = "output.txt"
-    infoToFind = "Field117:"
-    data_file = open(filename)
-    with data_file as form_file:
-        lines = []
-        for line in form_file:
-            lines.append(line)
-            if infoToFind in line:
-                print('String exist in a file')
 
 
 # Press the green button in the gutter to run the script.
