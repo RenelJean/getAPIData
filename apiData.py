@@ -1,10 +1,10 @@
 import requests
 import sys
-from secrets import api_key, subdomain, identifier, format
+from secrets import api_key, subdomain, identifier, formatted
 from requests.auth import HTTPBasicAuth
 import os
 
-apiUrl = "https://" + subdomain + ".wufoo.com/api/v3/forms/" + identifier + "/entries." + format
+apiUrl = "https://" + subdomain + ".wufoo.com/api/v3/forms/" + identifier + "/entries." + formatted
 
 
 def get_api_info() -> dict:
@@ -25,13 +25,15 @@ def test_file(file_name):
         print("Error File has no text, Empty text file")
 
 
+columns = ["entry_ID", "sign_up", "prefix", "first_name", "last_name", "email", "organization_site", "number",
+           "permission", "reasons"]
+
+
 def parse_file(filename):
     with open(filename) as formFile:
         i = 0
-        row = []
-        columns = ["entry_ID", "sign_up", "prefix", "first_name", "last_name", "email", "organization_site", "number",
-                   "permission", "reasons"]
         entries = []
+        row = []
         # Splits data and stores into entries
         for line in formFile:
             entry = line.split(':')
@@ -47,19 +49,20 @@ def parse_file(filename):
             # if line not blank store row data
             if line != " ":
                 row.append(line)
+    return row
 
-        print(row)
 
-    return row, columns
-    # print(entries[1][1])
-    # i = i + 1
+row_data = parse_file("output.txt")
+print(row_data)
+# print(entries[1][1])
+# i = i + 1
 
 
 def main():
-    # api_data = get_api_info()
-    # data = api_data['Entries']
-    # file_to_save = open("Output.txt", 'w')
-    # save_data(data, save_file=file_to_save)
+    api_data = get_api_info()
+    data = api_data['Entries']
+    file_to_save = open("Output.txt", 'w')
+    save_data(data, save_file=file_to_save)
     parse_file("output.txt")
 
 
