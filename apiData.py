@@ -3,6 +3,7 @@ import sys
 from secrets import api_key, subdomain, identifier, formatted
 from requests.auth import HTTPBasicAuth
 import os
+import db
 
 apiUrl = "https://" + subdomain + ".wufoo.com/api/v3/forms/" + identifier + "/entries." + formatted
 
@@ -16,17 +17,6 @@ def get_api_info() -> dict:
         sys.exit(-1)
     json_response = response.json()
     return json_response
-
-
-# test to see if file exist and if empty
-def test_file(file_name):
-    os.path.exists(file_name)
-    if os.stat(file_name).st_size == 0:
-        print("Error File has no text, Empty text file")
-
-
-columns = ["entry_ID", "sign_up", "prefix", "first_name", "last_name", "email", "organization_site", "number",
-           "permission", "reasons"]
 
 
 def parse_file(filename):
@@ -49,11 +39,43 @@ def parse_file(filename):
             # if line not blank store row data
             if line != " ":
                 row.append(line)
-    return row
+    return row, entries
 
 
-row_data = parse_file("output.txt")
-print(row_data)
+def prepare_result(data):
+    if not isinstance(data, list):
+        data = [data]
+    result = []
+    for location, entry in enumerate(data):
+        result.append(
+            {
+                "entryID": entry[0],
+                "prefix": entry[1],
+                "first_name": entry[2],
+                "last_name": entry[3],
+                "title": entry[4],
+                "org": entry[5],
+                "email": entry[6],
+                "website": entry[7],
+                "course_project": True
+                if len(entry[8]) > 0
+                else False,  # inline if to assign true if the string was not ''
+                "guest_speaker": True if len(entry[9]) > 0 else False,
+                "site_visit": True if len(entry[10]) > 0 else False,
+                "job_shadow": True if len(entry[11]) > 0 else False,
+                "internship": True if len(entry[12]) > 0 else False,
+                "career_panel": True if len(entry[13]) > 0 else False,
+                "networking_event": True if len(entry[14]) > 0 else False,
+                "subject_area": entry[15],
+                "description": entry[16],
+                "funding": entry[17],
+                "created_date": entry[18],
+            }
+        )
+    return result
+
+
+# print(row_data)
 # print(entries[1][1])
 # i = i + 1
 
@@ -61,9 +83,11 @@ print(row_data)
 def main():
     api_data = get_api_info()
     data = api_data['Entries']
+
     file_to_save = open("Output.txt", 'w')
     save_data(data, save_file=file_to_save)
-    parse_file("output.txt")
+   # row, entries = parse_file("output.txt")
+   # print(row)
 
 
 def save_data(data_to_save: list, save_file=None):
@@ -72,7 +96,7 @@ def save_data(data_to_save: list, save_file=None):
             print(f"{key}: {value}", file=save_file)
         # print the line break and save file
         print("+++++++++++++++++++++++++++++++++++++++++++++\n_______________________________________________",
-              file=save_file)
+              file=save_file,)
 
 
 # Press the green button in the gutter to run the script.

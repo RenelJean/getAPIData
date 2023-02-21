@@ -9,11 +9,20 @@ Description:
 Installs :
 
     for "import requests"
-      type into termnial in the project folder scope  - "python.exe -m pip install requests
+      type into terminal in the project folder scope  - "python.exe -m pip install requests
 "
 
     for "import mysql.connector"
-        type into termnial in the project folder scope or python local   - python -m pip install mysql-connector-python
+        type into terminal in the project folder scope or python local   - python -m pip install mysql-connector-python
+
+   for "import PySide6.QtCore"
+       type into terminal in the project folder scope or python local -  pip install pyside6
+
+    pip install PyQt5
+    pip install pyqt-tools
+
+    # if PyQt5 Designer not installed
+    pip install PyQt5Designer
 
 
 NEED TO FIX DB MYSQL error and parse data from output.txt into correct key value labels currently the project adds data from
