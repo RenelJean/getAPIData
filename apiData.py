@@ -83,12 +83,8 @@ def prepare_result(data):
 def main():
     api_data = get_api_info()
     data = api_data['Entries']
-
     file_to_save = open("Output.txt", 'w')
     save_data(data, save_file=file_to_save)
-   # row, entries = parse_file("output.txt")
-   # print(row)
-
 
 def save_data(data_to_save: list, save_file=None):
     for entry in data_to_save:
@@ -96,7 +92,7 @@ def save_data(data_to_save: list, save_file=None):
             print(f"{key}: {value}", file=save_file)
         # print the line break and save file
         print("+++++++++++++++++++++++++++++++++++++++++++++\n_______________________________________________",
-              file=save_file,)
+              file=save_file, )
 
 
 # Press the green button in the gutter to run the script.

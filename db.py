@@ -4,10 +4,11 @@ from typing import Tuple
 
 # For creating db
 def open_db(filename) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
-    connection = sqlite3.connect(filename)
-    # prepare a cursor object using cursor() method
-    cursor = connection.cursor()
-    return connection, cursor
+    db_connection = sqlite3.connect(
+        filename
+    )  # connect to existing DB or create new one
+    cursor = db_connection.cursor()  # get ready to read/write data
+    return db_connection, cursor
 
 
 def close_db(connection: sqlite3.Connection):
@@ -17,7 +18,7 @@ def close_db(connection: sqlite3.Connection):
 
 # create table
 def create_entries(cursor: sqlite3.Cursor):
-    form_table =  """CREATE TABLE IF NOT EXISTS WuFooData(
+    form_table = """CREATE TABLE IF NOT EXISTS WuFooData(
     entryID INTEGER PRIMARY KEY,
     prefix TEXT NOT NULL,
     first_name TEXT NOT NULL,
@@ -43,22 +44,25 @@ def create_entries(cursor: sqlite3.Cursor):
 
 
 # insert data
-def add_entries(cursor: sqlite3.Cursor, entries: list[dict]):
-    insertStatement = """INSERT OR IGNORE INTO WuFooData (entry_ID, prefix, first_name, last_name, title, 
-    organization_site, email, website, course_project, guest_speaker, site_visit, job_shadow, internship, 
-    career_panel, networking_event, subject_area, description, funding, created_date, created_by) VALUES(?,?,?,?,?,?,
-    ?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
-    for entry in entries:
-        entry_val = list(entry.values())
-        entry_val[0] = int(entry_val[0])  # turns id to int
-        entry_val = entry_val[:-2]
-        cursor.execute(insertStatement, entry_val)
+def add_entries(cursor: sqlite3.Cursor, entries_data: list[dict]):
+    insertStatement = """INSERT OR IGNORE INTO WuFooData (entryID, prefix, first_name, last_name, title, org, email, website,
+    course_project, guest_speaker, site_visit, job_shadow, internship, career_panel, networking_event,
+    subject_area, description, funding, created_date, created_by) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
+    i = 0
+    for entry in entries_data:
+
+        entry_values = list(
+            entry.values()
+        )  # get the list of values from the dictionary
+        entry_values[0] = int(
+            entry_values[0]
+        )  # the EntryID is a string, but I want it to be a number
+        entry_values = entry_values[:-2]
+        while "" in entry_values:
+            entry_values.remove("")
+        print(len(entry_values))
+      #  cursor.execute(insertStatement, entry_values)
 
 
 # cursor.execute("insert into test (Sign up,Prefix,First Name,Last Name,Title,email,Organization Website,Number,"
 #               "Permission,pwd) values('test@gmail.com','test')")
-
-curs, conn = open_db("output.txt")
-
-create_entries(curs)
-

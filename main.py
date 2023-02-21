@@ -1,15 +1,17 @@
+import apiData
 import db
 from db import open_db, close_db
-import apiData
+
+db_name = "cubesProject.sqlite"
 
 
 def main():
     json_res = apiData.get_api_info()
-    connection, cursor = open_db("cubesForms.sqlite")
+    conn, cursor = open_db(db_name)
     entries_list = json_res["Entries"]
     db.create_entries(cursor)
     db.add_entries(cursor, entries_list)
-    close_db(connection)
+    close_db(conn)
 
 
 if __name__ == "__main__":
