@@ -42,7 +42,7 @@ def parse_file(filename):
     return row, entries
 
 
-def prepare_result(data):
+def prepare_result(data: list):
     if not isinstance(data, list):
         data = [data]
     result = []
@@ -71,6 +71,7 @@ def prepare_result(data):
                 "funding": entry[17],
                 "created_date": entry[18],
             }
+
         )
     return result
 
@@ -85,6 +86,8 @@ def main():
     data = api_data['Entries']
     file_to_save = open("Output.txt", 'w')
     save_data(data, save_file=file_to_save)
+
+
 
 def save_data(data_to_save: list, save_file=None):
     for entry in data_to_save:

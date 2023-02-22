@@ -12,6 +12,7 @@ def main():
     db.create_entries(cursor)
     db.add_entries(cursor, entries_list)
     close_db(conn)
+    print(entries_list[5])
 
 
 if __name__ == "__main__":
