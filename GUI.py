@@ -1,52 +1,60 @@
-import random
 import sys
 import sqlite3
-import PySide6.QtCore
-from PySide6 import QtWidgets
+from PyQt5.uic import loadUi
+from PyQt5.QtWidgets import QDialog, QApplication, QTableWidget
+from PyQt5 import QtWidgets
+import PyQt5
 from qtpy import QtCore
 import db
 
-# Prints PySide6 version
-print(PySide6.__version__)
-
-# Prints the Qt version used to compile PySide6
-print(PySide6.QtCore.__version__)
 
 # connect to db
-conn = sqlite3.connect("cube_forms.sqlite")
-cursor = conn.cursor()
-db.create_entries(cursor)
-conn.commit()
-conn.close()
 
 
-class MyWidget(QtWidgets.QWidget):
+
+
+
+class MainWindow(QDialog):
+
     def __init__(self):
-        super().__init__()
+        labels = [
+            "First Name", "Prefix", "Position", "Last Name", "Organization", "Email",
+        ]
+        super(MainWindow, self).__init__()
+        loadUi("CubeFormData.ui", self)
+        self.tableWidget.setColumnWidth(0, 250)
+        self.tableWidget.setColumnWidth(1, 250)
+        self.tableWidget.setColumnWidth(2, 250)
+        self.tableWidget.setHorizontalHeaderLabels(labels)
+        self.load_data()
 
-        self.hello = ["Hallo Welt", "Hei maailma", "Hola Mundo", "Привет мир"]
-        self.headers = ["Position: ", "Prefix: ", "First Name: ", "Last Name: ", "Organization: ", "Email: "]
+    def load_data(self):
+        conn = sqlite3.connect("cubesProject.sqlite")
+        cursor = conn.cursor()
+        sql_query = "SELECT * FROM WuFooData"
 
-        self.button = QtWidgets.QPushButton("Click me!")
-        self.text = QtWidgets.QLabel("Hello World",
-                                     alignment=QtCore.Qt.AlignCenter)
+        self.tableWidget.setRowCount(11)
+        table_row = 0
 
-        self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.text)
-        self.layout.addWidget(self.button)
+        for row in cursor.execute(sql_query):
+            self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[0]))
+            self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[1]))
+            self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[2]))
 
-        self.button.clicked.connect(self.magic)
+            table_row += 1
+            print(row)
+        print("Ok")
 
-    @QtCore.Slot()
-    def magic(self):
-        self.text.setText(random.choice(self.headers))
+app = QApplication(sys.argv)
+main_screen = MainWindow()
+widget = QtWidgets.QStackedWidget()
+widget.addWidget(main_screen)
+widget.setFixedHeight(850)
+widget.setFixedWidth(1120)
+widget.show()
 
+try:
+    sys.exit(app.exec_())
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-
-    widget = MyWidget()
-    widget.resize(800, 600)
-    widget.show()
-
-    sys.exit(app.exec())
+except:
+    print("Exiting")

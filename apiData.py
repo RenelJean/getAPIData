@@ -88,7 +88,6 @@ def main():
     save_data(data, save_file=file_to_save)
 
 
-
 def save_data(data_to_save: list, save_file=None):
     for entry in data_to_save:
         for key, value in entry.items():
