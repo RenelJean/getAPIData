@@ -1,7 +1,7 @@
 import sys
 import sqlite3
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QDialog, QApplication, QTableWidget
+from PyQt5.QtWidgets import QDialog, QApplication, QPushButton
 from PyQt5 import QtWidgets
 import PyQt5
 from qtpy import QtCore
@@ -11,20 +11,26 @@ import db
 # connect to db
 
 
-
+def clicked_button():
+    print("clicked")
 
 
 class MainWindow(QDialog):
 
     def __init__(self):
         labels = [
-            "First Name", "Prefix", "Position", "Last Name", "Organization", "Email",
+            "First Name", "Last Name", "Prefix", "Period", "Organization", "Email",
         ]
+        check_labels = ["Course Project", "Guest Speaker", "Site Visit", "Job Shadow", "Internship",
+                        "Career Panel", "Networking Event"]
+
         super(MainWindow, self).__init__()
         loadUi("CubeFormData.ui", self)
         self.tableWidget.setColumnWidth(0, 250)
         self.tableWidget.setColumnWidth(1, 250)
         self.tableWidget.setColumnWidth(2, 250)
+        self.tableWidget.setColumnWidth(3, 250)
+        self.tableWidget.setColumnCount(6)
         self.tableWidget.setHorizontalHeaderLabels(labels)
         self.load_data()
 
@@ -33,7 +39,7 @@ class MainWindow(QDialog):
         cursor = conn.cursor()
         sql_query = "SELECT * FROM WuFooData"
 
-        self.tableWidget.setRowCount(11)
+        self.tableWidget.setRowCount(10)
         table_row = 0
 
         for row in cursor.execute(sql_query):
@@ -41,9 +47,32 @@ class MainWindow(QDialog):
             self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[1]))
             self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[2]))
 
+            self.tableWidget.setItem(table_row, 1, QtWidgets.QTableWidgetItem(row[1]))
+            self.tableWidget.setItem(table_row, 1, QtWidgets.QTableWidgetItem(row[2]))
+            self.tableWidget.setItem(table_row, 1, QtWidgets.QTableWidgetItem(row[3]))
+
+            self.tableWidget.setItem(table_row, 2, QtWidgets.QTableWidgetItem(row[2]))
+            self.tableWidget.setItem(table_row, 2, QtWidgets.QTableWidgetItem(row[3]))
+            self.tableWidget.setItem(table_row, 2, QtWidgets.QTableWidgetItem(row[4]))
+
+            self.tableWidget.setItem(table_row, 3, QtWidgets.QTableWidgetItem(row[6]))
+            self.tableWidget.setItem(table_row, 3, QtWidgets.QTableWidgetItem(row[7]))
+            self.tableWidget.setItem(table_row, 3, QtWidgets.QTableWidgetItem(row[8]))
+
+            self.tableWidget.setItem(table_row, 4, QtWidgets.QTableWidgetItem(row[3]))
+            self.tableWidget.setItem(table_row, 4, QtWidgets.QTableWidgetItem(row[4]))
+            self.tableWidget.setItem(table_row, 4, QtWidgets.QTableWidgetItem(row[5]))
+
+            self.tableWidget.setItem(table_row, 5, QtWidgets.QTableWidgetItem(row[4]))
+            self.tableWidget.setItem(table_row, 5, QtWidgets.QTableWidgetItem(row[5]))
+            self.tableWidget.setItem(table_row, 5, QtWidgets.QTableWidgetItem(row[6]))
+
             table_row += 1
+
             print(row)
+
         print("Ok")
+
 
 app = QApplication(sys.argv)
 main_screen = MainWindow()

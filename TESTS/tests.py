@@ -20,3 +20,5 @@ def test_db():
     record = cursor.fetchone()
     number_of_rows = record[0]  # the number is the first )and only) item in the tuple
     assert number_of_rows == 1
+
+#test if first name in the correct field

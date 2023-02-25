@@ -37,8 +37,8 @@ background-color: rgb(255, 222, 222);</string>
     <rect>
      <x>250</x>
      <y>50</y>
-     <width>311</width>
-     <height>91</height>
+     <width>1500</width>
+     <height>1500</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -48,16 +48,16 @@ color: rgb(255, 222, 222);
 color: rgb(255, 151, 151);</string>
    </property>
    <property name="text">
-    <string>View Table Data </string>
+    <string>Cube Project Entries </string>
    </property>
   </widget>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>200</y>
-     <width>701</width>
-     <height>321</height>
+     <x>350</x>
+     <y>100</y>
+     <width>750</width>
+     <height>500</height>
     </rect>
    </property>
    <column>
