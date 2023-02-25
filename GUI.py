@@ -69,7 +69,7 @@ class MainWindow(QDialog):
 
             table_row += 1
 
-            print(row)
+         #   print(row)
 
         print("Ok")
 

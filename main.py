@@ -1,6 +1,7 @@
 import apiData
 import db
 from db import open_db, close_db
+import GUI
 
 db_name = "cubesProject.sqlite"
 
@@ -11,8 +12,9 @@ def main():
     entries_list = json_res["Entries"]
     db.create_entries(cursor)
     db.add_entries(cursor, entries_list)
+    GUI
     close_db(conn)
-    print(entries_list[5])
+   # print(entries_list[5])
 
 
 if __name__ == "__main__":
