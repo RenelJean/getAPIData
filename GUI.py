@@ -4,6 +4,12 @@ from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog, QApplication, QPushButton
 from PyQt5 import QtWidgets
 import PyQt5
+from os.path import join
+from os.path import dirname
+
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QGuiApplication
+from PyQt5.QtQuick import QQuickView
 from qtpy import QtCore
 import db
 
@@ -80,7 +86,19 @@ widget = QtWidgets.QStackedWidget()
 widget.addWidget(main_screen)
 widget.setFixedHeight(850)
 widget.setFixedWidth(1120)
+b1 = QtWidgets.QPushButton(main_screen)
+b1.setText("Create User")
 widget.show()
+
+App = QGuiApplication(sys.argv)
+
+url = QUrl(join(dirname(__file__), 'main.qml'))
+
+view = QQuickView()
+view.setSource(url)
+view.show()
+print(view.source())
+sys.exit(App.exec_())
 
 try:
     sys.exit(app.exec_())
