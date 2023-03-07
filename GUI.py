@@ -1,7 +1,7 @@
 import sys
 import sqlite3
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QDialog, QApplication, QPushButton
+from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QListWidget, QListWidgetItem
 from PyQt5 import QtWidgets
 import PyQt5
 from os.path import join
@@ -75,7 +75,7 @@ class MainWindow(QDialog):
 
             table_row += 1
 
-         #   print(row)
+        #   print(row)
 
         print("Ok")
 
@@ -86,8 +86,18 @@ widget = QtWidgets.QStackedWidget()
 widget.addWidget(main_screen)
 widget.setFixedHeight(850)
 widget.setFixedWidth(1120)
+account_list = QListWidget()
 b1 = QtWidgets.QPushButton(main_screen)
 b1.setText("Create User")
+account_list.resize(200, 1000)
+widget.addWidget(account_list)
+
+QListWidgetItem("1", account_list)
+QListWidgetItem("2", account_list)
+QListWidgetItem("3", account_list)
+QListWidgetItem("4", account_list)
+QListWidgetItem("5", account_list)
+
 widget.show()
 
 App = QGuiApplication(sys.argv)

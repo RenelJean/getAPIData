@@ -55,36 +55,36 @@ def create_users(cursor: sqlite3.Cursor):
     """
     cursor.execute(user_records)
 
-
-def user_info():
-    entryID = 0;
-    email = input("Please enter your email: ")
-    first_name = input("Please enter your first name: ")
-    last_name = input("Please enter your last name: ")
-    title = input("Please enter your title: ")
-    department = input("Please enter your department: ")
-    input_data = [entryID, email, first_name, last_name, title, department]
-    return input_data
-
-
-def user_data(user_input):
-    input_data = [user_input[1], user_input[2], user_input[3], user_input[4],
-                  user_input[5]]
-    return input_data
-
-
-def add_users(cursor: sqlite3.Cursor, input_data: user_data(user_info()), entries: list[dict]):
-    insert_user = """INSERT OR IGNORE INTO UsersRecords (entryID, email, first_name, last_name, title, department) 
-    VALUES(?,?,?,?,?,?)
-    """
-    for entry in entries:
-        entry_val = list(
-            entry.values()
-        )
-        entry_val[0] = int(
-            entry_val[0]
-        )
-        print(entry_val)
+#
+# def user_info():
+#     entryID = 0
+#     email = input("Please enter your email: ")
+#     first_name = input("Please enter your first name: ")
+#     last_name = input("Please enter your last name: ")
+#     title = input("Please enter your title: ")
+#     department = input("Please enter your department: ")
+#     input_data = [entryID, email, first_name, last_name, title, department]
+#     return input_data
+#
+#
+# def user_data(user_input):
+#     input_data = [user_input[1], user_input[2], user_input[3], user_input[4],
+#                   user_input[5]]
+#     return input_data
+#
+#
+# def add_users(cursor: sqlite3.Cursor, input_data: user_data(user_info()), entries: list[dict]):
+#     insert_user = """INSERT OR IGNORE INTO UsersRecords (entryID, email, first_name, last_name, title, department)
+#     VALUES(?,?,?,?,?,?)
+#     """
+#     for entry in entries:
+#         entry_val = list(
+#             entry.values()
+#         )
+#         entry_val[0] = int(
+#             entry_val[0]
+#         )
+#         print(entry_val)
 
 
 # insert data
