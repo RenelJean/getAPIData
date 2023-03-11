@@ -24,6 +24,10 @@ def clicked_button():
 class MainWindow(QDialog):
 
     def __init__(self):
+        conn = sqlite3.connect("cubesProject.sqlite")
+        cursor = conn.cursor()
+        sql_query = "SELECT * FROM WuFooData"
+        table_data = cursor.execute(sql_query)
         labels = [
             "First Name", "Last Name", "Prefix", "Period", "Organization", "Email",
         ]
@@ -38,17 +42,13 @@ class MainWindow(QDialog):
         self.tableWidget.setColumnWidth(3, 250)
         self.tableWidget.setColumnCount(6)
         self.tableWidget.setHorizontalHeaderLabels(labels)
-        self.load_data()
+        self.load_data(table_data)
 
-    def load_data(self):
-        conn = sqlite3.connect("cubesProject.sqlite")
-        cursor = conn.cursor()
-        sql_query = "SELECT * FROM WuFooData"
-
+    def load_data(self, table_data):
         self.tableWidget.setRowCount(10)
         table_row = 0
 
-        for row in cursor.execute(sql_query):
+        for row in table_data:
             self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[0]))
             self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[1]))
             self.tableWidget.setItem(table_row, 0, QtWidgets.QTableWidgetItem(row[2]))

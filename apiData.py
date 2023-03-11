@@ -1,11 +1,11 @@
 import requests
 import sys
-from secrets import api_key, subdomain, identifier, formatted
+from config import api_key, subdomain, identifier, formatted
 from requests.auth import HTTPBasicAuth
-import os
-import db
+
 
 apiUrl = "https://" + subdomain + ".wufoo.com/api/v3/forms/" + identifier + "/entries." + formatted
+db_name = "cubesProject.sqlite"
 
 
 def get_api_info() -> dict:
@@ -42,13 +42,14 @@ def parse_file(filename):
     return row, entries
 
 
-def prepare_result(data: list):
+def prepare_result(data):
     if not isinstance(data, list):
         data = [data]
     result = []
     for location, entry in enumerate(data):
         result.append(
             {
+
                 "entryID": entry[0],
                 "prefix": entry[1],
                 "first_name": entry[2],
