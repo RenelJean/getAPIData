@@ -143,8 +143,9 @@ class WuFooEntriesWindow(QWidget):
             display_text = f"{item['first_name']}  {item['last_name']} : {item['org']}"
             list_item = QListWidgetItem(display_text, listview=self.list_control)
             list_item.setData(1, item)  # lets put the dictionary for later use
+        return list_item
 
-    def wufoo_entry_selected(self, current: QListWidgetItem, previous: QListWidgetItem):
+    def wufoo_entry_selected(self, current: QListWidgetItem):
         selected_data = current.data(1)  # we put the full record in data role 1
         self.prefix_box.setText(selected_data["prefix"])
         self.fname_box.setText(selected_data["first_name"])
@@ -153,22 +154,21 @@ class WuFooEntriesWindow(QWidget):
         self.org_box.setText(selected_data["org"])
         self.email_box.setText(selected_data["email"])
         self.website_box.setText(selected_data["website"])
-        self.project_check.setChecked(selected_data["course_project"])
-        self.speaker_check.setChecked(selected_data["guest_speaker"])
-        self.visit_check.setChecked(selected_data["site_visit"])
-        self.shadow_check.setChecked(selected_data["job_shadow"])
-        self.internship_check.setChecked(selected_data["internship"])
-        self.panel_check.setChecked(selected_data["career_panel"])
-        self.network_even_check.setChecked(selected_data["networking_event"])
+        self.project_check.setChecked(selected_data[False])
+        self.speaker_check.setChecked(selected_data[False])
+        self.visit_check.setChecked(selected_data[False])
+        self.shadow_check.setChecked(selected_data[False])
+        self.internship_check.setChecked(selected_data[False])
+        self.panel_check.setChecked(selected_data[False])
+        self.network_even_check.setChecked(selected_data[False])
         self.subject.setText(selected_data["subject_area"])
         self.description_box.setPlainText(selected_data["description"])
         self.funding.setText(selected_data["funding"])
 
 
+
 app = QApplication(sys.argv)
 main_screen = WuFooEntriesWindow()
-main_screen.setup_window()
-main_screen.put_data_in_list(CubeApi.get_cubes_data_from_db())
 sys.exit(app.exec_())
 
 # import sqlite3

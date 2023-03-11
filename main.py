@@ -23,7 +23,7 @@ def sprint2():  # comment for force workflow
 def sprint3():
     qt_app = PySide6.QtWidgets.QApplication(sys.argv)  # sys.argv is the list of command line arguments
     my_window = gui_screen.WuFooEntriesWindow()
-    my_window.setWindowTitle("Instructor Demo Comp490 2023")
+    my_window.setWindowTitle("Comp490 2023")
     sys.exit(qt_app.exec())
 
 
